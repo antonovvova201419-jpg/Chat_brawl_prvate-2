@@ -1,14 +1,4 @@
 export default async (request) => {
-  if (request.method === 'OPTIONS') {
-    return new Response(null, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type'
-      }
-    });
-  }
-
   if (request.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'POST only' }), { status: 405 });
   }
@@ -29,7 +19,7 @@ export default async (request) => {
 
     return new Response(JSON.stringify({ ok: true }), {
       status: 200,
-      headers: { 'Access-Control-Allow-Origin': '*' }
+      headers: { 'Content-Type': 'application/json' }
     });
   } catch (e) {
     return new Response(JSON.stringify({ error: 'Server error' }), { status: 500 });
